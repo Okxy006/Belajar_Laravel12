@@ -10,17 +10,17 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [TesterController::class, 'index']);
-
+Route::get('/send-email', [TesterController::class, 'send']);
 Route::prefix('admin')->group(function () {
 
-    Route::middleware('guset')->controller(AuthController::class)->group(function () {
+    Route::middleware('guest')->controller(AuthController::class)->group(function () {
         Route::get('/login', 'showLogin')->name('login');
         Route::post('/login', 'login');
         Route::get('/register', 'showRegister')->name('register');
-        Route::get('/login', 'register');
+        Route::post('/register', 'register');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group (function () {
 
         Route::controller(DashboardController::class)->group(function (){
             Route::get('/dashboard', 'index')->name('dashboard');

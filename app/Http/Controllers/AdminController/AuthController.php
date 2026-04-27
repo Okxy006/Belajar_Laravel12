@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -38,7 +38,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-         return $request->all();
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
@@ -55,7 +54,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
+        
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
